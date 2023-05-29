@@ -39,15 +39,16 @@ public class Passenger {
     }
 
     public void printPassengersDetails(){
-        System.out.println("Name: " + this.getName());
-        System.out.println("Passenger Number: " + this.getPassengerNo());
+        System.out.println("Passenger Name: " + this.getName());
+        System.out.println("Passenger Number: " +  this.getPassengerNo());
         if(passengerType.equals(PassengerType.GOLD) || passengerType.equals(PassengerType.STANDARD))
         {
             System.out.println("Balance : " + getBalance());
         }
-        System.out.println("Signed Up Activities: ");
+        System.out.println("Activities Signed Up:");
         for (Activity activity : enrolledActivities) {
-            System.out.println(activity.getId() +". Activity Name: " +activity.getName() + " Destination: " + activity.getDestination().getName() + " Price Paid: " + getPricePaid(activity.getCost()));
+            System.out.println("- Destination: " + activity.getDestination().getName() + ", Activity: "
+                    + activity.getName() + ", Price: " + getPricePaid(activity.getCost()));
         }
     }
 

@@ -15,7 +15,7 @@ public class TravelPackage{
 
     public TravelPackage(Integer id, String name, Integer passengerCapacity, List<Destination> destinations,
             List<Passenger> passengers) {
-        Id = id;
+        this.Id = id;
         this.name = name;
         this.passengerCapacity = passengerCapacity;
         this.destinations = destinations;
@@ -24,35 +24,30 @@ public class TravelPackage{
 
     public void printItinerary()
     {
-        System.out.println("Travel Package Name :" + this.name);
+        System.out.println("Travel Package: " + this.name);
+        System.out.println("Destinations :");
         for (Destination destination : destinations) {
-            System.out.println("Destinations :");
-            System.out.println(destination.getId()+ ". " + destination.getName());
-            System.out.println("Activities :");
-            List<Activity> activities  =  destination.getActivities();
-            for (Activity activity : activities) {
-                System.out.println(activity.getId() + ". Name: "+ activity.getName() + "\n  " + 
-                " Cost: "+ activity.getCost() + "\n  " + 
-                " Capacity: " + activity.getCapacity() + "\n  " + 
-                " Description: " + activity.getDescription());
+            System.out.println(destination.getName());
+            for (Activity activity : destination.getActivities()) {
+                System.out.println("- " + activity.getName() + " (Cost: " + activity.getCost() + ")" +
+                " (Capacity: " + activity.getCapacity() + ")" + 
+                " (Description: " + activity.getDescription() + ")");
             }
         }
     }
 
-    public void printEnrolledPassengers()
+    public void printPassengerList()
     {
-        System.out.println("Package Name: " + this.name);
-        System.out.println("Passenger Capacity: "+ this.passengerCapacity);
-        System.out.println("No of Passengers Enrolled: "+ this.passengers.size());
-        System.out.println("Passenger Details: ");
-        Integer i = 1;
+        System.out.println("Travel Package: " + name);
+        System.out.println("Passenger Capacity: " + passengerCapacity);
+        System.out.println("Number of Passengers Enrolled: " + passengers.size());
+        System.out.println("Passengers:");
         for (Passenger passenger : passengers) {
-            System.out.println(i + ". Name: "+ passenger.getName()+ " Number: " + passenger.getPassengerNo());
-            i++;
+            System.out.println("- " + passenger.getName() + " (Number: " + passenger.getPassengerNo() + ")");
         }
     }
 
-    public void printActivityDetails()
+    public void printAvailableActivities()
     {
         System.out.println("Details of Activities: ");
         Map<Activity,Integer> mActivities = new HashMap<>();
@@ -75,11 +70,10 @@ public class TravelPackage{
 
         for (Map.Entry<Activity,Integer> mEntry : mActivities.entrySet()) {
             Activity activity = mEntry.getKey();
-            System.out.println(activity.getId() + ". Name: "+ activity.getName() + "\n  " + 
-            "Cost: "+ activity.getCost() + "\n  " + 
-            "Capacity: " + activity.getCapacity() + "\n  " + 
-            "Description: " + activity.getDescription() +"\n  "+
-            "Available Capacity: " + mEntry.getValue());
+
+            System.out.println("- Destination: " + activity.getDestination().getName() + ", Activity: "
+                            + activity.getName() + ", Available Spaces: " +  mEntry.getValue());
+
         }
     }
 }

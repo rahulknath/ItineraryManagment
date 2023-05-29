@@ -7,6 +7,7 @@ public class Activity {
     private Double cost;
     private Integer capacity;
     private Destination destination;
+
     public Activity(Integer id, String name, String description, Double cost, Integer capacity,
             Destination destination) {
         Id = id;
@@ -35,5 +36,4 @@ public class Activity {
         return destination;
     }
    
-    
 }

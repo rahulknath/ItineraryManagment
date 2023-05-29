@@ -211,7 +211,7 @@ public class TripbookingApplicationTests {
 
         // Capture the output of printEnrolledPassengers()
         ByteArrayOutputStream outputStream = captureOutput();
-        travelPackage.printEnrolledPassengers();
+        travelPackage.printPassengerList();
         String output = outputStream.toString().trim();
 
         // Verify the output
@@ -257,7 +257,7 @@ public class TripbookingApplicationTests {
 
         // Capture the output of printActivityDetails()
         ByteArrayOutputStream outputStream = captureOutput();
-        travelPackage.printActivityDetails();
+        travelPackage.printAvailableActivities();
         String output = outputStream.toString().trim();
 
         // Verify the output
