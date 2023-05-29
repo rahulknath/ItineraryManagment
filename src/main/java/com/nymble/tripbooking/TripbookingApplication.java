@@ -1,3 +1,12 @@
+/**
+ * TripbookingApplication is a class that demonstrates the functionality of the trip booking system.
+ * It creates destinations, activities, passengers, and a travel package, and performs various operations such as enrolling activities,
+ * printing itinerary, passenger list, available activities, and passenger details.
+ *
+ * @author Rahul Kumar Nath
+ * @version 1.0
+ * @since 26-05-2023
+ */
 package com.nymble.tripbooking;
 
 import java.util.ArrayList;
@@ -13,8 +22,8 @@ public class TripbookingApplication {
 
 	public static void main(String[] args) {
 		 // Create destinations
-		 Destination destination1 = new Destination(1, "Beach", new ArrayList<>());
-		 Destination destination2 = new Destination(2, "Mountain", new ArrayList<>());
+		 Destination destination1 = new Destination("Beach", new ArrayList<>());
+		 Destination destination2 = new Destination("Mountain", new ArrayList<>());
  
 		 // Create activities for destination1
 		 Activity activity1 = new Activity(1, "Snorkeling", "Enjoy underwater marine life", 50.0, 20, destination1);
@@ -47,7 +56,7 @@ public class TripbookingApplication {
 		 passengers.add(passenger1);
 		 passengers.add(passenger2);
  
-		 TravelPackage travelPackage = new TravelPackage(1, "Summer Vacation", 50, destinations, passengers);
+		 TravelPackage travelPackage = new TravelPackage("Summer Vacation", 50, destinations, passengers);
  
 		 // Print itinerary
 		 travelPackage.printItinerary();
