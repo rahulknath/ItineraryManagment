@@ -1,12 +1,10 @@
 /**
-
-The TravelPackage class represents a travel package that includes multiple destinations and passengers.
-*/
+ * The TravelPackage class represents a travel package that includes multiple destinations and passengers.
+ */
 package com.nymble.tripbooking.Entitities;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class TravelPackage {
@@ -16,20 +14,9 @@ public class TravelPackage {
     private List<Destination> destinations;
     private List<Passenger> passengers;
 
-    /**
-     * Constructs a TravelPackage object with the specified parameters.
-     *
-     * @param name              the name of the travel package
-     * @param passengerCapacity the maximum capacity of passengers for the travel
-     *                          package
-     * @param destinations      the list of destinations included in the travel
-     *                          package
-     * @param passengers        the list of passengers enrolled in the travel
-     *                          package
-     */
-    public TravelPackage(String name, Integer passengerCapacity, List<Destination> destinations,
+    public TravelPackage(String id, String name, Integer passengerCapacity, List<Destination> destinations,
             List<Passenger> passengers) {
-        this.Id = UUID.randomUUID().toString().substring(0, 3);
+        Id = id;
         this.name = name;
         this.passengerCapacity = passengerCapacity;
         this.destinations = destinations;
@@ -37,63 +24,122 @@ public class TravelPackage {
     }
 
     /**
-     * Prints the itinerary of the travel package, including destinations and their
-     * activities.
+     * Constructs a TravelPackage object with the specified name, passenger capacity, and destinations.
+     *
+     * @param name              the name of the travel package
+     * @param passengerCapacity the maximum capacity of passengers for the travel package
+     * @param destinations      the list of destinations included in the travel package
      */
-    public void printItinerary() {
-        System.out.println("Travel Package: " + this.name);
-        System.out.println("Destinations :");
-        for (Destination destination : destinations) {
-            System.out.println(destination.getName());
-            for (Activity activity : destination.getActivities()) {
-                System.out.println("- " + activity.getName() + " (Cost: " + activity.getCost() + ")" +
-                        " (Capacity: " + activity.getCapacity() + ")" +
-                        " (Description: " + activity.getDescription() + ")");
-            }
-        }
+    public TravelPackage(String name, Integer passengerCapacity, List<Destination> destinations) {
+        this.Id = UUID.randomUUID().toString().substring(0, 3);
+        this.name = name;
+        this.passengerCapacity = passengerCapacity;
+        this.destinations = destinations;
+        this.passengers = new ArrayList<>();
     }
 
     /**
-     * Prints the list of passengers enrolled in the travel package.
+     * Constructs a TravelPackage object with the specified name, passenger capacity, destinations, and passengers.
+     *
+     * @param name              the name of the travel package
+     * @param passengerCapacity the maximum capacity of passengers for the travel package
+     * @param destinations      the list of destinations included in the travel package
+     * @param passengers        the list of passengers enrolled in the travel package
      */
-    public void printPassengerList() {
-        System.out.println("Travel Package: " + name);
-        System.out.println("Passenger Capacity: " + passengerCapacity);
-        System.out.println("Number of Passengers Enrolled: " + passengers.size());
-        System.out.println("Passengers:");
-        for (Passenger passenger : passengers) {
-            System.out.println("- " + passenger.getName() + " (Number: " + passenger.getPassengerNo() + ")");
-        }
+    public TravelPackage(String name, Integer passengerCapacity, List<Destination> destinations,
+            List<Passenger> passengers) {
+        this(name, passengerCapacity, destinations);
+        this.passengers = passengers;
+    }
+
+
+    /**
+     * Returns the ID of the travel package.
+     *
+     * @return the ID of the travel package
+     */
+    public String getId() {
+        return Id;
     }
 
     /**
-     * Prints the details of available activities in the travel package.
+     * Sets the ID of the travel package.
+     *
+     * @param id the ID of the travel package
      */
-    public void printAvailableActivities() {
-        System.out.println("Details of Activities: ");
-        Map<Activity, Integer> mActivities = new HashMap<>();
-        for (Passenger passenger : passengers) {
-            List<Activity> lAct = passenger.getEnrolledActivities();
-            for (Activity activity : lAct) {
-                if (mActivities.containsKey(activity)) {
-                    mActivities.put(activity, mActivities.get(activity) + 1);
-                } else {
-                    mActivities.put(activity, 1);
-                }
-            }
-        }
-
-        for (Map.Entry<Activity, Integer> mEntry : mActivities.entrySet()) {
-            mActivities.put(mEntry.getKey(), mEntry.getKey().getCapacity() - mEntry.getValue());
-        }
-
-        for (Map.Entry<Activity, Integer> mEntry : mActivities.entrySet()) {
-            Activity activity = mEntry.getKey();
-
-            System.out.println("- Destination: " + activity.getDestination().getName() + ", Activity: "
-                    + activity.getName() + ", Available Spaces: " + mEntry.getValue());
-
-        }
+    public void setId(String id) {
+        Id = id;
     }
 
+    /**
+     * Returns the name of the travel package.
+     *
+     * @return the name of the travel package
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the name of the travel package.
+     *
+     * @param name the name of the travel package
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Returns the passenger capacity of the travel package.
+     *
+     * @return the passenger capacity of the travel package
+     */
+    public Integer getPassengerCapacity() {
+        return passengerCapacity;
+    }
+
+    /**
+     * Sets the passenger capacity of the travel package.
+     *
+     * @param passengerCapacity the passenger capacity of the travel package
+     */
+    public void setPassengerCapacity(Integer passengerCapacity) {
+        this.passengerCapacity = passengerCapacity;
+    }
+
+    /**
+     * Returns the list of destinations included in the travel package.
+     *
+     * @return the list of destinations
+     */
+    public List<Destination> getDestinations() {
+        return destinations;
+    }
+
+    /**
+     * Sets the list of destinations included in the travel package.
+     *
+     * @param destinations the list of destinations
+     */
+    public void setDestinations(List<Destination> destinations) {
+        this.destinations = destinations;
+    }
+
+    /**
+     * Returns the list of passengers enrolled in the travel package.
+     *
+     * @return the list of passengers
+     */
+    public List<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    /**
+     * Sets the list of passengers enrolled in the travel package.
+     *
+     * @param passengers the list of passengers
+     */
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
+    }
 }

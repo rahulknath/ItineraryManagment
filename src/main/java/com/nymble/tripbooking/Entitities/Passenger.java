@@ -1,9 +1,9 @@
 /**
-The Passenger class represents a passenger enrolled in a travel package.
-*/
-
+ * The Passenger class represents a passenger enrolled in a travel package.
+ */
 package com.nymble.tripbooking.Entitities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,24 +14,45 @@ public class Passenger {
     private PassengerType passengerType;
     private List<Activity> enrolledActivities;
 
-    /**
-     * Constructs a Passenger object with the specified parameters.
-     *
-     * @param name               the name of the passenger
-     * @param passengerNo        the passenger number
-     * @param balance            the balance of the passenger
-     * @param passengerType      the type of the passenger (STANDARD, GOLD, or
-     *                           PREMIUM)
-     * @param enrolledActivities the list of activities in which the passenger is
-     *                           enrolled
-     */
-    public Passenger(String name, Integer passengerNo, Double balance, PassengerType passengerType,
-            List<Activity> enrolledActivities) {
+    public Passenger(String name, PassengerType passengerType,Double balance, String passengerNo) {
         this.name = name;
-        this.passengerNo = UUID.randomUUID().toString().substring(0, 3);
+        this.passengerNo = passengerNo;
         this.balance = balance;
         this.passengerType = passengerType;
-        this.enrolledActivities = enrolledActivities;
+        this.enrolledActivities =  new ArrayList<>();
+    }
+
+    /**
+     * Constructs a Passenger object with the specified name and passenger type.
+     *
+     * @param name          the name of the passenger
+     * @param passengerType the type of the passenger (STANDARD, GOLD, or PREMIUM)
+     */
+    public Passenger(String name, PassengerType passengerType) {
+        this.name = name;
+        this.passengerNo = UUID.randomUUID().toString().substring(0, 3);
+        this.passengerType = passengerType;
+        this.enrolledActivities = new ArrayList<>();
+        this.balance = 0.0;
+    }
+
+    /**
+     * Constructs a Passenger object with the specified name, passenger type, and balance.
+     *
+     * @param name          the name of the passenger
+     * @param passengerType the type of the passenger (STANDARD, GOLD, or PREMIUM)
+     * @param balance       the balance of the passenger
+     */
+    public Passenger(String name, PassengerType passengerType, double balance) {
+        this(name, passengerType);
+        this.balance = balance;
+    }
+
+    public Passenger(String name, PassengerType premium, String id,double balance) {
+        this.name = name;
+        this.passengerType = premium;
+        this.passengerNo = id;
+        this.balance = balance;
     }
 
     /**
@@ -80,36 +101,14 @@ public class Passenger {
     }
 
     /**
-     * Prints the details of the passenger, including name, number, and enrolled
-     * activities.
-     */
-    public void printPassengersDetails() {
-        System.out.println("Passenger Name: " + this.getName());
-        System.out.println("Passenger Number: " + this.getPassengerNo());
-        if (passengerType.equals(PassengerType.GOLD) || passengerType.equals(PassengerType.STANDARD)) {
-            System.out.println("Balance: " + getBalance());
-        }
-        System.out.println("Activities Signed Up:");
-        for (Activity activity : enrolledActivities) {
-            System.out.println("- Destination: " + activity.getDestination().getName() + ", Activity: "
-                    + activity.getName() + ", Price: " + getPricePaid(activity.getCost()));
-        }
-    }
-
-    /**
-     * Calculates and returns the price paid by the passenger for a given activity.
+     * Sets the balance of the passenger.
      *
-     * @param cost the cost of the activity
-     * @return the price paid by the passenger
+     * @param balance the balance of the passenger
      */
-    public Double getPricePaid(Double cost) {
-        if (passengerType.equals(PassengerType.GOLD)) {
-            return cost * 0.1;
-        } else if (passengerType.equals(PassengerType.STANDARD)) {
-            return cost;
-        } else {
-            return 0.0;
-        }
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 
+    public void setPassengerNo(String string) {
+    }
 }

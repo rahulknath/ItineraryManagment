@@ -14,6 +14,7 @@ public class Activity {
     private Double cost;
     private Integer capacity;
     private Destination destination;
+    private Integer noActivityRegistration;
 
     /**
      * Constructs an Activity object with the specified parameters.
@@ -22,18 +23,30 @@ public class Activity {
      * @param name        the name of the activity
      * @param description the description of the activity
      * @param cost        the cost of the activity
-     * @param capacity    the capacity of the activity
+     * @param capacity   the capacity of the activity
      * @param destination the destination where the activity takes place
+     * @param noActivityRegistration the number of registration for the activity
      */
-    public Activity(Integer id, String name, String description, Double cost, Integer capacity,
+    public Activity(String name, String description, Double cost, Integer capacity,
             Destination destination) {
         Id = UUID.randomUUID().toString().substring(0, 3);
-        ;
         this.name = name;
         this.description = description;
         this.cost = cost;
         this.capacity = capacity;
         this.destination = destination;
+        this.noActivityRegistration = 0;
+    }
+
+    public Activity(String id, String name, String description, Double cost, Integer capacity, Destination destination,
+            Integer noActivityRegistration) {
+        Id = id;
+        this.name = name;
+        this.description = description;
+        this.cost = cost;
+        this.capacity = capacity;
+        this.destination = destination;
+        this.noActivityRegistration = noActivityRegistration;
     }
 
     /**
@@ -90,4 +103,22 @@ public class Activity {
         return destination;
     }
 
+    /**
+     * Incrementing the noActivityRegistration after passenger registration.
+     *
+     */
+    public void setNoActivityRegistration(Activity activity){
+        if(activity!=null && activity.getId().equals(activity.getId()))
+        {
+            this.noActivityRegistration = this.noActivityRegistration + 1;
+        }
+    }
+
+    /**
+     * Returns the number of available capacity.
+     *
+     */
+    public Integer getNumberOfAvialableCapacity(){
+        return capacity - noActivityRegistration;
+    }
 }
